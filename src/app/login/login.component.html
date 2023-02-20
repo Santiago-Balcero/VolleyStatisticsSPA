@@ -1,0 +1,18 @@
+<app-menubar></app-menubar>
+<div class="container">
+  <div class="row">
+    <p-dialog position="top" header="Login error" [(visible)]="displayModal" [style]="{width: '50vw'}">
+      {{errorMsg}}
+    </p-dialog>
+    <h3>Welcome to Volley Statistics</h3>
+    <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+        <div class="form-group">
+            <input type="email" class="form-control" id="username" name="username" formControlName="username" 
+                    placeholder="Your email" pInputText />
+            <input type="password" class="form-control" id="password" name="password" formControlName="password" 
+                    placeholder="Your password" pInputText />
+            <button pButton type="submit" class="p-button-rounded" [label]="buttonLabel" [disabled]="loginForm.invalid"></button>
+        </div>
+    </form>
+</div>
+</div>

@@ -13,8 +13,8 @@ export class AuthInterceptor implements HttpInterceptor {
                 headers: req.headers.set("Authorization",
                     "Bearer " + idToken)
             });
-            console.log("Interceptor");
-            console.log(req.headers);
+            console.log("Interceptor for JWT");
+            console.log(req);
             return next.handle(cloned);
         }
         else {

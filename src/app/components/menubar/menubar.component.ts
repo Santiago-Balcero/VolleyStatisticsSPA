@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { LabelConstants } from '../utils/constants/labels.constants';
+import { LabelConstants } from '../../utils/constants/labels.constants';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,11 +10,11 @@ import { Router } from '@angular/router';
 })
 export class MenubarComponent implements OnInit {
 
-  items: MenuItem[];
+  items: MenuItem[] = [];
 
-  buttonLabel: string;
+  buttonLabel: string = '';
 
-  logged: boolean;
+  logged: boolean = false;
   
   constructor(private router: Router) { }
   

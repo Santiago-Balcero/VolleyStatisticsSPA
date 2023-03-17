@@ -10,17 +10,19 @@ import { DialogModule } from 'primeng/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MenubarComponent } from './menubar/menubar.component';
-import { LoginComponent } from './login/login.component';
-import { PlayerMainComponent } from './player-main/player-main.component';
+import { MenubarComponent } from './components/menubar/menubar.component';
+import { LoginComponent } from './views/login/login.component';
+import { PlayerMainComponent } from './views/player-main/player-main.component';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { RegisterFormComponent } from './views/register-form/register-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenubarComponent,
     LoginComponent,
-    PlayerMainComponent
+    PlayerMainComponent,
+    RegisterFormComponent
   ],
   imports: [
     BrowserModule,

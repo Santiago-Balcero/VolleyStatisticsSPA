@@ -1,0 +1,14 @@
+.container {
+  border: 1px solid white;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+h3, p {
+  font-family: "Roboto", sans-serif;
+}

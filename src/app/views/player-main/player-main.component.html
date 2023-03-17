@@ -1,0 +1,18 @@
+<app-menubar></app-menubar>
+<div class="container">
+  <ng-container class="playerName">
+    <h3>{{ player.name + ' ' + player.surname}}</h3>
+  </ng-container>
+  <ng-container class="playerInfo">
+    <p><strong>Active since: </strong>{{ player.playerCreationDateTime }}</p>
+    <p><strong>Category: </strong>{{ player.category }}</p>
+    <p><strong>Position: </strong>{{ player.position }}</p>
+    <p><strong>Total games: </strong>{{ player.totalGames }}</p>
+    <p><strong>Total actions: </strong>{{ player.totalActions }}</p>
+    <p><strong>Total points: </strong>{{ player.totalPoints }}</p>
+    <p><strong>Total perfects: </strong>{{ player.totalPerfects }}</p>
+    <p><strong>Total neutrals: </strong>{{ player.totalNeutrals }}</p>
+    <p><strong>Total errors: </strong>{{ player.totalErrors }}</p>
+    <p><strong>Total effectiveness: </strong>{{ player.totalEffectiveness }}%</p>
+  </ng-container>
+</div>

@@ -1,7 +1,7 @@
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { PlayerMainComponent } from './player-main/player-main.component';
+import { LoginComponent } from './views/login/login.component';
+import { PlayerMainComponent } from './views/player-main/player-main.component';
 
 const routes: Routes = [
   {path: "", title: "Welcome to Volley Statistics", component: LoginComponent},

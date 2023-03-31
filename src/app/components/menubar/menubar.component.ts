@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { LabelConstants } from '../../utils/constants/labels.constants';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { SessionDataService } from 'src/app/services/session-data.service';
 
 @Component({
   selector: 'app-menubar',
@@ -15,14 +17,15 @@ export class MenubarComponent implements OnInit {
   buttonLabel: string = '';
 
   logged: boolean = false;
+
+  location: Location; 
   
-  constructor(private router: Router) { }
+  constructor(private router: Router, location: Location) {
+    this.location = location;
+  }
   
   ngOnInit(): void {
-    if(localStorage.getItem("token")) {
-      this.logged = true;
-    }
-    if(this.logged) {
+    if(SessionDataService.isAuth()) {
       this.buttonLabel = LabelConstants.LOGOUT_BTN;
       this.items = [
         {label: LabelConstants.HOME_LBL},
@@ -31,22 +34,25 @@ export class MenubarComponent implements OnInit {
       ];
     }
     else {
-      this.buttonLabel = LabelConstants.REGISTER_BTN;
+      this.buttonLabel = this.location.path() === '/register' ? LabelConstants.LOGIN_BTN : LabelConstants.REGISTER_BTN;
       this.items = [
+        {label: LabelConstants.HOME_LBL, routerLink: ['']},
         {label: LabelConstants.ABOUT_LBL}
       ];
     }
   }
 
   onClick(): void {
-    if(this.logged) {
-      localStorage.clear();
-      console.log("LocalStorage was cleared")
-      this.router.navigate([""]);
+    if(SessionDataService.isAuth()) {
+      SessionDataService.clearData();
+      console.log('Data from session was cleared.')
+      this.router.navigate(['']);
+    }
+    if (this.location.path() === '/register') {
+      this.router.navigate(['']);
     }
     else {
-      console.log("Navigate to register form")
-      // NAVIGATE TO REGISTER FORM
+      this.router.navigate(['register'])
     }
   }
 

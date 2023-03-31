@@ -4,6 +4,7 @@ import { LabelConstants } from '../../utils/constants/labels.constants';
 import { AuthService } from '../../services/auth.service';
 import jwtDecode from 'jwt-decode';
 import { Router } from '@angular/router';
+import { SessionDataService } from 'src/app/services/session-data.service';
 
 @Component({
   selector: 'app-login',
@@ -37,19 +38,20 @@ export class LoginComponent implements OnInit {
     let formData: FormData = new FormData();
     formData.append('username', this.loginForm.value.username);
     formData.append('password', this.loginForm.value.password);
-    this.authService.login(formData).subscribe(
-      (result:any) => {
+    this.authService.login(formData).subscribe({
+      next: (result) => {
         console.log(result);
-        localStorage.setItem('token', result.access_token);
+        SessionDataService.auth();
+        SessionDataService.setToken(result.access_token);
         const tokenInfo: any = jwtDecode(result.access_token);
-        localStorage.setItem('playerId', tokenInfo.sub);
+        SessionDataService.setPlayerId(tokenInfo.sub);
         this.router.navigate(['player']);
       },
-      (error: any) => {
-        this.displayModal = true;
+      error: (error) => {
         this.errorMsg = error.error.detail;
+        this.displayModal = true;
       }
-    );
+    });
   }
 
 }

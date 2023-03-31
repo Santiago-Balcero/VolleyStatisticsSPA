@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,7 +34,8 @@ import { RegisterFormComponent } from './views/register-form/register-form.compo
     ReactiveFormsModule,
     InputTextModule,
     HttpClientModule,
-    DialogModule
+    DialogModule,
+    DropdownModule
   ],
   providers: [
     {

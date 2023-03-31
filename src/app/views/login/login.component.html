@@ -1,9 +1,11 @@
 <app-menubar></app-menubar>
 <div class="container">
   <div class="row">
+    <!-- Modal section -->
     <p-dialog position="top" header="Login error" [(visible)]="displayModal" [style]="{width: '50vw'}">
       {{errorMsg}}
     </p-dialog>
+    <!-- End of modal section -->
     <h3>Welcome to Volley Statistics</h3>
     <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
         <div class="form-group">
@@ -14,5 +16,5 @@
             <button pButton type="submit" class="p-button-rounded" [label]="buttonLabel" [disabled]="loginForm.invalid"></button>
         </div>
     </form>
-</div>
+  </div>
 </div>

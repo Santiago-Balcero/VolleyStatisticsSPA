@@ -11,10 +11,14 @@ export class PlayerService {
   
   constructor(private http: HttpClient) { }
   
-  loginUrlApi: string = `${ApiConstants.API_URL}/players`;
+  playersUrlApi: string = `${ApiConstants.API_URL}/players`;
 
   getPlayerById(playerId: string): Observable<any> {
-    return this.http.get(`${this.loginUrlApi}/${playerId}`);
+    return this.http.get(`${this.playersUrlApi}/${playerId}`);
+  }
+
+  registerNewPlayer(newPlayerData: object): Observable<any> {
+    return this.http.post(this.playersUrlApi, newPlayerData);
   }
 
 }

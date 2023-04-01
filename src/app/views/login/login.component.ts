@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { labelConstants } from '@constants/labels.constants';
-import { AuthService } from '../../services/auth.service';
-import jwtDecode from 'jwt-decode';
+import { AuthService } from '@services/auth.service';
 import { Router } from '@angular/router';
-import { SessionDataService } from 'src/app/services/session-data.service';
 
 @Component({
   selector: 'app-login',
@@ -30,22 +28,15 @@ export class LoginComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    localStorage.clear();
   }
 
   onSubmit(): void {
     console.log(this.loginForm.value);
-    let formData: FormData = new FormData();
-    formData.append('username', this.loginForm.value.username);
-    formData.append('password', this.loginForm.value.password);
-    this.authService.login(formData).subscribe({
-      next: (result) => {
-        console.log(result);
-        SessionDataService.auth();
-        SessionDataService.setToken(result.access_token);
-        const tokenInfo: any = jwtDecode(result.access_token);
-        SessionDataService.setPlayerId(tokenInfo.sub);
-        this.router.navigate(['player']);
+    const email = this.loginForm.value.username;
+    const password = this.loginForm.value.password;
+    this.authService.login(email, password).subscribe({
+      next: () => {
+        this.router.navigate(['main']);
       },
       error: (error) => {
         this.errorMsg = error.error.detail;

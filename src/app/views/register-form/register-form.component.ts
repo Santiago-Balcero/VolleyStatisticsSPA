@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { labelConstants } from '@constants/labels.constants';
 import { Router } from '@angular/router';
-import { PlayerService } from '../../services/player.service';
+import { PlayerService } from '@services/player.service';
+import { NewPlayer } from '@models/newPlayer.model';
+import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'app-register-form',
@@ -13,7 +15,7 @@ export class RegisterFormComponent implements OnInit {
 
   registerForm: FormGroup;
 
-  buttonlabel: string = labelConstants.REGISTER_BTN;
+  buttonLabel: string = labelConstants.REGISTER_BTN;
 
   categories: Object[] = labelConstants.PLAYER_CATEGORIES;
 
@@ -27,7 +29,8 @@ export class RegisterFormComponent implements OnInit {
 
   modalMsg: string = '';
 
-  constructor(private readonly formBuilder: FormBuilder, private router: Router, private playerService: PlayerService) {
+  constructor(private readonly formBuilder: FormBuilder, private router: Router, private playerService: PlayerService,
+    private authService: AuthService) {
       this.registerForm = this.formBuilder.group({
         email: ['', [Validators.required, Validators.email]],
         firstName: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(30)]],
@@ -43,7 +46,8 @@ export class RegisterFormComponent implements OnInit {
 
   onSubmit(): void {
     console.log('Form data:', this.registerForm.value);
-    this.playerService.registerNewPlayer(this.registerForm.value).subscribe({
+    const newPlayer: NewPlayer = this.registerForm.value;
+    this.playerService.registerNewPlayer(newPlayer).subscribe({
       next: (result) => {
         console.log(result);
         this.modalTitle = 'Welcome to Volley Statistics';
@@ -66,7 +70,19 @@ export class RegisterFormComponent implements OnInit {
     }
   }
 
-  confirm(): void {
+  continue(): void {
+    this.authService.login(this.registerForm.get('email')!.value, this.registerForm.get('password')!.value).subscribe({
+      next: () => {
+        this.router.navigate(['main']);
+      },
+      error: (error) => {
+        console.log(error.error.detail);
+        this.router.navigate(['']);
+      }
+    });
+  }
+  
+  toLogin(): void {
     this.router.navigate(['']);
   }
 

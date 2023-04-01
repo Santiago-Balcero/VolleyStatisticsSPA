@@ -2,10 +2,10 @@
 <div class="container">
   <div class="row">
     <!-- Modal section -->
-    <p-dialog position="top" [header]="modalTitle" [(visible)]="displayModal" [style]="{width: '250px'}">
+    <p-dialog position="top" [header]="modalTitle" [(visible)]="displayModal" [style]="{width: '250px'}" (onHide)="toLogin()">
       {{modalMsg}}
       <div class="footer" *ngIf="displayModalBtn">
-        <button pButton class="p-button-rounded" label="Ok" (click)="confirm()"></button>
+        <button pButton class="p-button-rounded" label="Continue" (click)="continue()"></button>
       </div>
     </p-dialog>
     <!-- End of modal section -->

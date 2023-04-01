@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { LabelConstants } from '../../utils/constants/labels.constants';
+import { labelConstants } from '@constants/labels.constants';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { SessionDataService } from 'src/app/services/session-data.service';
+import { SessionDataService } from '@services/session-data.service';
 
 @Component({
   selector: 'app-menubar',
@@ -20,38 +20,38 @@ export class MenubarComponent implements OnInit {
 
   location: Location; 
   
-  constructor(private router: Router, location: Location) {
+  constructor(private router: Router, location: Location,
+    private sessionDataService: SessionDataService) {
     this.location = location;
   }
   
   ngOnInit(): void {
-    if(SessionDataService.isAuth()) {
-      this.buttonLabel = LabelConstants.LOGOUT_BTN;
+    if(this.sessionDataService.getToken()) {
+      this.buttonLabel = labelConstants.LOGOUT_BTN;
       this.items = [
-        {label: LabelConstants.HOME_LBL},
-        {label: LabelConstants.MY_TEAMS_LBL},
-        {label: LabelConstants.ABOUT_LBL}
+        {label: labelConstants.HOME_LBL},
+        {label: labelConstants.MY_TEAMS_LBL},
+        {label: labelConstants.ABOUT_LBL}
       ];
     }
     else {
-      this.buttonLabel = this.location.path() === '/register' ? LabelConstants.LOGIN_BTN : LabelConstants.REGISTER_BTN;
+      this.buttonLabel = this.location.path() === '/register' ? labelConstants.LOGIN_BTN : labelConstants.REGISTER_BTN;
       this.items = [
-        {label: LabelConstants.HOME_LBL, routerLink: ['']},
-        {label: LabelConstants.ABOUT_LBL}
+        {label: labelConstants.HOME_LBL, routerLink: ['']},
+        {label: labelConstants.ABOUT_LBL}
       ];
     }
   }
 
   onClick(): void {
-    if(SessionDataService.isAuth()) {
-      SessionDataService.clearData();
-      console.log('Data from session was cleared.')
+    if(this.sessionDataService.getToken()) {
+      this.sessionDataService.clearData();
       this.router.navigate(['']);
     }
-    if (this.location.path() === '/register') {
+    else if (this.location.path() === '/register') {
       this.router.navigate(['']);
     }
-    else {
+    else if (!this.sessionDataService.getToken()){
       this.router.navigate(['register'])
     }
   }

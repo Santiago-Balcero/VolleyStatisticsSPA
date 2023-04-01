@@ -1,44 +1,33 @@
 import { Injectable } from '@angular/core';
+import { getCookie, setCookie, removeCookie } from 'typescript-cookie';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionDataService {
 
-  private static token: string = '';
-  private static playerId: string = '';
-  private static loggedIn: boolean = false;
-
   constructor() { }
 
-  static setToken(token: string): void {
-    SessionDataService.token = token;
+  setToken(token: string): void {
+    setCookie('token', token, {expires: 30, path: ''});
   }
 
-  static getToken(): string {
-    return SessionDataService.token;
+  getToken(): string {
+    return getCookie('token')!;
   }
 
-  static setPlayerId(playerId: string): void {
-    SessionDataService.playerId = playerId;
+  setPlayerId(playerId: string): void {
+    setCookie('playerId', playerId, {expires: 30, path: ''});
   }
 
-  static getPlayerId(): string {
-    return SessionDataService.playerId;
+  getPlayerId(): string {
+    return getCookie('playerId')!;
   }
 
-  static auth(): void {
-    SessionDataService.loggedIn = true;
-  }
-  
-  static isAuth(): boolean {
-    return SessionDataService.loggedIn;
-  }
-
-  static clearData(): void {
-    SessionDataService.token = '';
-    SessionDataService.playerId = '';
-    SessionDataService.loggedIn = false;
+  clearData(): void {
+    removeCookie('token');
+    removeCookie('playerId');
+    console.log('Session cookies were cleared.');
   }
 
 }

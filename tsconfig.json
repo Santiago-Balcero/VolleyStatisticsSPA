@@ -24,7 +24,10 @@
     ],
     "paths": {
       "@environments/*": ["./src/environments/*"],
-      "@constants/*": ["./src/app/utils/constants/*"]
+      "@constants/*": ["./src/app/utils/constants/*"],
+      "@services/*": ["./src/app/services/*"],
+      "@models/*": ["./src/app/models/*"],
+      "@guards/*": ["./src/app/guards/*"]
     },
   },
   "angularCompilerOptions": {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ValidationErrors } from '@angular/forms';
-import { LabelConstants } from '../../utils/constants/labels.constants';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { labelConstants } from '@constants/labels.constants';
 import { Router } from '@angular/router';
 import { PlayerService } from '../../services/player.service';
 
@@ -13,11 +13,11 @@ export class RegisterFormComponent implements OnInit {
 
   registerForm: FormGroup;
 
-  buttonLabel: string = LabelConstants.REGISTER_BTN;
+  buttonlabel: string = labelConstants.REGISTER_BTN;
 
-  categories: Object[] = LabelConstants.PLAYER_CATEGORIES;
+  categories: Object[] = labelConstants.PLAYER_CATEGORIES;
 
-  positions: Object[] = LabelConstants.PLAYER_POSITIONS;
+  positions: Object[] = labelConstants.PLAYER_POSITIONS;
 
   displayModal: boolean = false;
 

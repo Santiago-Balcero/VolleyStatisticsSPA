@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LabelConstants } from '../../utils/constants/labels.constants';
+import { labelConstants } from '@constants/labels.constants';
 import { AuthService } from '../../services/auth.service';
 import jwtDecode from 'jwt-decode';
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  buttonLabel: string = LabelConstants.LOGIN_BTN;
+  buttonLabel: string = labelConstants.LOGIN_BTN;
 
   displayModal: boolean = false;
 

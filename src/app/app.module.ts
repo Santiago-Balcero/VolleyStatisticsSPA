@@ -14,7 +14,7 @@ import { AppComponent } from './app.component';
 import { MenubarComponent } from './components/menubar/menubar.component';
 import { LoginComponent } from './views/login/login.component';
 import { PlayerMainComponent } from './views/player-main/player-main.component';
-import { AuthInterceptor } from './services/auth.interceptor';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RegisterFormComponent } from './views/register-form/register-form.component';
 
 @NgModule({

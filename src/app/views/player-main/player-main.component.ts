@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '@services/player.service';
 import { Router } from '@angular/router';
-import { SessionDataService } from '@services/session-data.service';
 
 @Component({
   selector: 'app-player-main',
@@ -10,22 +9,16 @@ import { SessionDataService } from '@services/session-data.service';
 })
 export class PlayerMainComponent implements OnInit {
 
-  playerId: string;
-
   player: any = {};
 
-  constructor(private playerService: PlayerService, private router: Router,
-    private sessionDataService: SessionDataService) {
-    this.playerId = this.sessionDataService.getPlayerId();
-    console.log('Player id: ', this.playerId);
+  constructor(private playerService: PlayerService, private router: Router) { }
+    
+  ngOnInit(): void {
     this.getPlayerData();
   }
 
-  ngOnInit(): void {
-  }
-
   private getPlayerData(): void {
-    this.playerService.getPlayerById(this.playerId).subscribe({
+    this.playerService.getPlayerById().subscribe({
       next: (data) => {
         console.log('Data from player: ', data);
         this.player = data;

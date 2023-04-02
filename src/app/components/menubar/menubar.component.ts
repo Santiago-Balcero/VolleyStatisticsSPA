@@ -3,7 +3,7 @@ import { MenuItem } from 'primeng/api';
 import { labelConstants } from '@constants/labels.constants';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { SessionDataService } from '@services/session-data.service';
+import { TokenService } from '@services/token.service';
 
 @Component({
   selector: 'app-menubar',
@@ -21,12 +21,12 @@ export class MenubarComponent implements OnInit {
   location: Location; 
   
   constructor(private router: Router, location: Location,
-    private sessionDataService: SessionDataService) {
+    private tokenService: TokenService) {
     this.location = location;
   }
   
   ngOnInit(): void {
-    if(this.sessionDataService.getToken()) {
+    if(this.tokenService.getToken()) {
       this.buttonLabel = labelConstants.LOGOUT_BTN;
       this.items = [
         {label: labelConstants.HOME_LBL},
@@ -44,14 +44,14 @@ export class MenubarComponent implements OnInit {
   }
 
   onClick(): void {
-    if(this.sessionDataService.getToken()) {
-      this.sessionDataService.clearData();
+    if(this.tokenService.getToken()) {
+      this.tokenService.clearData();
       this.router.navigate(['']);
     }
     else if (this.location.path() === '/register') {
       this.router.navigate(['']);
     }
-    else if (!this.sessionDataService.getToken()){
+    else if (!this.tokenService.getToken()){
       this.router.navigate(['register'])
     }
   }

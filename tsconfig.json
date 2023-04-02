@@ -27,7 +27,8 @@
       "@constants/*": ["./src/app/utils/constants/*"],
       "@services/*": ["./src/app/services/*"],
       "@models/*": ["./src/app/models/*"],
-      "@guards/*": ["./src/app/guards/*"]
+      "@guards/*": ["./src/app/guards/*"],
+      "@interceptors/*": ["./src/app/interceptors/*"]
     },
   },
   "angularCompilerOptions": {

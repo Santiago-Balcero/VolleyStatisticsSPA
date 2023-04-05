@@ -17,19 +17,19 @@ export class AuthService {
     let formData: FormData = new FormData();
     formData.append('username', email);
     formData.append('password', password);
-    return this.http.post<{access_token: string, refresh_token: string}>(`${this.loginUrlApi}/login`, formData).pipe(
+    return this.http.post<{accessToken: string, refreshToken: string}>(`${this.loginUrlApi}/login`, formData).pipe(
       // tap operator doesn't changes any workflow done with this observable,
       // it only makes an operation before sending data to subscribers
       tap(result => {
         console.log(result);
-        this.tokenService.setToken(result.access_token);
-        this.tokenService.setRefreshToken(result.refresh_token);
+        this.tokenService.setToken(result.accessToken);
+        this.tokenService.setRefreshToken(result.refreshToken);
       })
     );
   }
 
   refreshToken(refreshToken: string): Observable<any> {
-    return this.http.post<{access_token: string, refresh_token: string}>(`${this.loginUrlApi}/refresh`, {refreshToken}).pipe(
+    return this.http.post<{access_token: string, refresh_token: string}>(`${this.loginUrlApi}/refresh-token`, {refreshToken}).pipe(
       tap(result => {
         console.log(result);
         this.tokenService.setToken(result.access_token);

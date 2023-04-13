@@ -16,6 +16,7 @@ import { LoginComponent } from './views/login/login.component';
 import { PlayerMainComponent } from './views/player-main/player-main.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RegisterFormComponent } from './views/register-form/register-form.component';
+import { PlayerTeamsComponent } from './views/player-teams/player-teams.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { RegisterFormComponent } from './views/register-form/register-form.compo
     MenubarComponent,
     LoginComponent,
     PlayerMainComponent,
-    RegisterFormComponent
+    RegisterFormComponent,
+    PlayerTeamsComponent
   ],
   imports: [
     BrowserModule,

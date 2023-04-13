@@ -29,8 +29,8 @@ export class MenubarComponent implements OnInit {
     if(this.tokenService.getToken()) {
       this.buttonLabel = labelConstants.LOGOUT_BTN;
       this.items = [
-        {label: labelConstants.HOME_LBL},
-        {label: labelConstants.MY_TEAMS_LBL},
+        {label: labelConstants.HOME_LBL, routerLink: ['/main']},
+        {label: labelConstants.MY_TEAMS_LBL, routerLink: ['/teams']},
         {label: labelConstants.ABOUT_LBL}
       ];
     }

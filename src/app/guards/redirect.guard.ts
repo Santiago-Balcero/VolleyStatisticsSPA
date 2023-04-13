@@ -10,7 +10,7 @@ export class RedirectGuard implements CanActivate {
   constructor (private router: Router, private tokenService: TokenService) { }
   
   canActivate(): boolean {
-    if (this.tokenService.isValidToken()) {
+    if (this.tokenService.isValidRefreshToken()) {
       console.log('Guard working... session is active.');
       this.router.navigate(['main']);
       return false;

@@ -29,11 +29,11 @@ export class AuthService {
   }
 
   refreshToken(refreshToken: string): Observable<any> {
-    return this.http.post<{access_token: string, refresh_token: string}>(`${this.loginUrlApi}/refresh-token`, {refreshToken}).pipe(
+    return this.http.post<{accessToken: string, refreshToken: string}>(`${this.loginUrlApi}/refresh-token`, {'refreshToken': refreshToken}).pipe(
       tap(result => {
         console.log(result);
-        this.tokenService.setToken(result.access_token);
-        this.tokenService.setRefreshToken(result.refresh_token);
+        this.tokenService.setToken(result.accessToken);
+        this.tokenService.setRefreshToken(result.refreshToken);
       })
     );
   }

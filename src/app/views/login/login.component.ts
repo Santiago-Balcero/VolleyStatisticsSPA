@@ -7,16 +7,13 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['../../../styles.css']
 })
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-
   buttonLabel: string = labelConstants.LOGIN_BTN;
-
   displayModal: boolean = false;
-
   errorMsg: string = '';
 
   constructor(private readonly formBuilder: FormBuilder, private authService: AuthService,

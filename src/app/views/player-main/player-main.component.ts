@@ -1,19 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '@services/player.service';
 import { Router } from '@angular/router';
+import { StarRatingService } from '../../services/star-rating.service';
+import { labelConstants } from '@constants/labels.constants';
 
 @Component({
   selector: 'app-player-main',
   templateUrl: './player-main.component.html',
-  styleUrls: ['./player-main.component.css']
+  styleUrls: ['../../../styles.css']
 })
 export class PlayerMainComponent implements OnInit {
+    
+  player: any = null;
+  buttonLabel: string = '';
+  loading: boolean = false;
 
-  player: any = {};
-
-  constructor(private playerService: PlayerService, private router: Router) { }
+  constructor(
+    private playerService: PlayerService,
+    private router: Router,
+    private starService: StarRatingService 
+  ) { }
     
   ngOnInit(): void {
+    this.loading = true;
+    this.buttonLabel = labelConstants.START_GAME_LBL;
     this.getPlayerData();
   }
 
@@ -22,12 +32,25 @@ export class PlayerMainComponent implements OnInit {
       next: (data) => {
         console.log('Data from player: ', data);
         this.player = data;
+        this.starService.showStars(this.player.totalEffectiveness);
+        this.loading = false;
       },
       error: (error) => {
         console.log(error);
+        this.loading = false;
         this.router.navigate(['']);
       }
     });
+  }
+
+  editPlayer(): void {
+    this.playerService.editPlayer(this.player);
+    this.router.navigate(['/account']);
+  }
+
+  ja() {
+    this.player.totalEffectiveness -= 0.1
+    this.starService.showStars(Math.round(this.player.totalEffectiveness * 100) / 100)
   }
 
 }

@@ -2,9 +2,9 @@ npm i jwt-decode
 npm i typescript-cookie
 
 # TO DO
-- Style to player main
-- Button in player main and menubar for player teams
-- What is Volley Statistics page
+- Edit account form -> show info, edit button with edit icon for each value
+- Change alerts for modal as in D
+- About page
 - TESTS !!!
 - ESLint
 - Constants to be stored in DB, create service for getting texts of constants for each view and/or component

@@ -1,18 +1,32 @@
 <app-menubar></app-menubar>
-<div class="container">
-  <ng-container class="playerName">
-    <h3>{{ player.firstName + ' ' + player.lastName}}</h3>
-  </ng-container>
-  <ng-container class="playerInfo">
-    <p><strong>Active since: </strong>{{ player.playerCreationDateTime }}</p>
-    <p><strong>Category: </strong>{{ player.category }}</p>
-    <p><strong>Position: </strong>{{ player.position }}</p>
-    <p><strong>Total games: </strong>{{ player.totalGames }}</p>
-    <p><strong>Total actions: </strong>{{ player.totalActions }}</p>
-    <p><strong>Total points: </strong>{{ player.totalPoints }}</p>
-    <p><strong>Total perfects: </strong>{{ player.totalPerfects }}</p>
-    <p><strong>Total neutrals: </strong>{{ player.totalNeutrals }}</p>
-    <p><strong>Total errors: </strong>{{ player.totalErrors }}</p>
-    <p><strong>Total effectiveness: </strong>{{ player.totalEffectiveness }}%</p>
-  </ng-container>
+<div class="container" >
+  <div class="row" *ngIf="player">
+    <div class="col">
+      <div class="playerName">
+        <h3 class="title">{{ player.firstName + ' ' + player.lastName}}</h3>
+      </div>
+      <app-star-rating></app-star-rating>
+      <ng-container class="playerInfo">
+        <p class="info-text"><strong>Category: </strong>{{ player.category }}</p>
+        <p class="info-text"><strong>Position: </strong>{{ player.position }}</p>
+        <p class="info-text"><strong>Total effectiveness: </strong>{{ player.totalEffectiveness | percent }}</p>
+        <p class="info-text"><strong>Total games: </strong>{{ player.totalGames }}</p>
+        <p class="info-text"><strong>Total actions: </strong>{{ player.totalActions }}</p>
+        <p class="info-text"><strong>Total points: </strong>{{ player.totalPoints }}</p>
+        <p class="info-text"><strong>Total perfects: </strong>{{ player.totalPerfects }}</p>
+        <p class="info-text"><strong>Total neutrals: </strong>{{ player.totalNeutrals }}</p>
+        <p class="info-text"><strong>Total errors: </strong>{{ player.totalErrors }}</p>
+        <p class="info-text"><strong>Active since: </strong>{{ player.playerCreationDateTime | date:'longDate' }}</p>
+      </ng-container>
+    </div>
+    <div class="menu-item wd-80px" (click)="editPlayer()">
+      <span class="material-icons-round menu-icon">manage_accounts</span>
+      <p class="icon-text">Edit account</p>
+    </div>
+    <button pButton type="submit" class="p-button-rounded" [label]="buttonLabel">
+        <span class="material-icons-round button log-button">play_arrow</span>
+    </button>
+  </div>
+  <app-loader [show]="loading"></app-loader>
 </div>
+<!-- <button (click)="ja()">JA</button> -->

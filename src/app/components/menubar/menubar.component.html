@@ -1,7 +1,20 @@
-<p-menubar [model]="items">
-  <ng-template pTemplate="start">
+<p-menubar class="menu">
+  <ng-template pTemplate="start" class="menuStart">
+    <ng-container *ngFor="let item of items">
+        <div class="menu-item" [routerLink]="item.routerLink">
+            <span class="material-icons-round menu-icon">{{item.icon}}</span>
+            <p class="menu-label">{{item.label}}</p>
+        </div>
+    </ng-container>
+    <div *ngIf="logged" class="menu-item" (click)="onClick()">
+        <span class="material-icons-round menu-icon">logout</span>
+        <p class="menu-label">Log out</p>
+    </div>
   </ng-template>
-  <ng-template pTemplate="end">
-    <button pButton [label]="buttonLabel" class="p-button-rounded" (click)="onClick()" ></button>
+  <ng-template *ngIf="!logged" pTemplate="end">
+    <button pButton [label]="buttonLabel" class="p-button-rounded menu-button" (click)="onClick()">
+        <span *ngIf="buttonLabel === 'Log in'" class="material-icons-round button log-button">login</span>
+        <span *ngIf="buttonLabel === 'Register'" class="material-icons-round button log-button">person_add</span>
+    </button>
   </ng-template>
 </p-menubar>

@@ -28,7 +28,8 @@
       "@services/*": ["./src/app/services/*"],
       "@models/*": ["./src/app/models/*"],
       "@guards/*": ["./src/app/guards/*"],
-      "@interceptors/*": ["./src/app/interceptors/*"]
+      "@interceptors/*": ["./src/app/interceptors/*"],
+      "@components/*": ["./src/app/components/*"]
     },
   },
   "angularCompilerOptions": {

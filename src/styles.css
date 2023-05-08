@@ -1,1 +1,244 @@
 /* You can add global styles to this file, and also import other style files */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-sub {
+    border: 1px solid white;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin-top: 10px;
+}
+  
+.row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ffffff99;
+    border-radius: 25px;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 300px;
+}
+
+.col.bottom-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 300px;
+    background: #1e1e1e;
+    order: 1px solid #383838;
+    border-radius: 25px;
+    margin-top: 12px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 300px;
+}
+  
+.title {
+    color: #FFD54F;
+    font-family: "Roboto", sans-serif;
+    margin-top: 0px;
+    margin-bottom: 8px;
+}
+
+.title.mb-16px {
+    margin-bottom: 16px;
+}
+  
+input {
+    margin-bottom: 12px;
+    border-radius: 25px;
+}
+  
+button {
+    margin-top: 4px;
+    font-family: "Roboto", sans-serif;
+    padding: 0.5rem 0.7rem;
+}
+
+button.menu-button {
+    padding: 0.5rem 0.7rem;
+}
+
+input, p-dropdown {
+    margin-bottom: 12px;
+    border-radius: 25px;
+    width: 250px;
+}
+
+.p-menubar-start {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: inherit;
+}
+
+.p-menubar.p-component {
+    justify-content: center;
+    font-family: "Roboto", sans-serif;
+    justify-content: space-evenly;
+
+    font-size: small;
+    width: inherit;
+}
+
+.p-menubar-end.ng-star-inserted {
+    margin-left: 0px;
+}
+
+.menu-item.ng-star-inserted {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Roboto", sans-serif;
+    font-size: small;
+    color: #ffffffe0;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    width: 60px;
+    text-align: center;
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Roboto", sans-serif;
+    font-size: small;
+    color: #ffffffe0;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    width: 60px;
+    text-align: center;
+}
+
+.menu-item.wd-80px {
+    width: 80px;
+}
+
+.menu-label {
+    margin-bottom: 0px;
+    margin-top: 0px;
+    width: 60px;
+}
+
+:host ::ng-deep .p-dropdown {
+    border-radius: 25px;
+}
+  
+:host ::ng-deep .p-dropdown-label {
+    width: 210px;
+}
+  
+.alert {
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    color:#ee2828;
+}
+  
+.info-text {
+    font-family: "Roboto", sans-serif;
+    font-size: small;
+    color: #ffffffe0;
+    width: 250px;
+    margin-top: 0px;
+}
+
+.help-text {
+    font-family: "Roboto", sans-serif;
+    font-size: small;
+    color: #ffffffe0;
+    margin-top: 0px;
+    margin-bottom: 12px;
+    width: 250px;
+}
+
+.icon-text {
+    font-family: "Roboto", sans-serif;
+    font-size: small;
+    color: #ffffffe0;
+    margin-top: 0px;
+    margin-bottom: 12px;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.stars-container {
+    margin-bottom: 12px;
+}
+
+.material-icons-round.active {
+    color: #ffffffe0;
+}
+
+.material-icons-round.disabled {
+    color: #ffffff70;
+}
+
+.material-icons-round.button {
+    color: #212529;
+}
+
+.material-icons-round.log-button {
+    font-size: 1.2rem;
+    margin-right: 3px;
+}
+
+.material-icons-round.menu-icon {
+    color: #ffffffe0;
+}
+
+.material-icons-round.loader {
+    color: #ffffff70;
+    scale: 2.5;
+    animation: size 0.5s 1, colors 1s infinite;
+}
+
+@keyframes size {
+    from {scale: 1;}
+    to {scale: 2.5;}
+}
+
+@keyframes colors {
+    from {color: #ffffff70;}
+    to {color: #FFD54F;}
+}
+
+.loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    margin-bottom: 250px;
+    background: #121212;
+}

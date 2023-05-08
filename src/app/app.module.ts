@@ -17,6 +17,9 @@ import { PlayerMainComponent } from './views/player-main/player-main.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RegisterFormComponent } from './views/register-form/register-form.component';
 import { PlayerTeamsComponent } from './views/player-teams/player-teams.component';
+import { StarRatingComponent } from './components/star-rating/star-rating.component';
+import { EditPlayerComponent } from './views/edit-player/edit-player.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { PlayerTeamsComponent } from './views/player-teams/player-teams.componen
     LoginComponent,
     PlayerMainComponent,
     RegisterFormComponent,
-    PlayerTeamsComponent
+    PlayerTeamsComponent,
+    StarRatingComponent,
+    EditPlayerComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

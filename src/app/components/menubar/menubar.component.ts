@@ -26,33 +26,41 @@ export class MenubarComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    if(this.tokenService.getToken()) {
-      this.buttonLabel = labelConstants.LOGOUT_BTN;
-      this.items = [
-        {label: labelConstants.HOME_LBL, routerLink: ['/main']},
-        {label: labelConstants.MY_TEAMS_LBL, routerLink: ['/teams']},
-        {label: labelConstants.ABOUT_LBL}
-      ];
-    }
-    else {
-      this.buttonLabel = this.location.path() === '/register' ? labelConstants.LOGIN_BTN : labelConstants.REGISTER_BTN;
-      this.items = [
-        {label: labelConstants.HOME_LBL, routerLink: ['']},
-        {label: labelConstants.ABOUT_LBL}
-      ];
-    }
+    this.setLabels();
   }
 
   onClick(): void {
-    if(this.tokenService.getToken()) {
+    if(this.tokenService.isValidToken()) {
       this.tokenService.clearData();
       this.router.navigate(['']);
     }
     else if (this.location.path() === '/register') {
       this.router.navigate(['']);
     }
-    else if (!this.tokenService.getToken()){
+    else if (!this.tokenService.isValidToken()){
       this.router.navigate(['register'])
+    }
+  }
+
+  private setLabels(): void {
+    if(this.tokenService.isValidToken()) {
+      this.logged = true;
+      this.buttonLabel = labelConstants.LOGOUT_BTN;
+      this.items = [
+        {label: labelConstants.HOME_LBL, routerLink: '/main', icon: 'home'},
+        {label: labelConstants.MY_TEAMS_LBL, routerLink: '/teams', icon: 'groups'},
+        {label: labelConstants.MY_GAMES_LBL, routerLink: '/games', icon: 'sports_volleyball'},
+        {label: labelConstants.ABOUT_LBL, icon: 'info'},
+        {label: labelConstants.SETTINGS_LBL, icon: 'settings'}
+      ];
+    }
+    else {
+      this.logged = false;
+      this.buttonLabel = this.location.path() === '/register' ? labelConstants.LOGIN_BTN : labelConstants.REGISTER_BTN;
+      this.items = [
+        {label: labelConstants.HOME_LBL, routerLink: '', icon: 'home'},
+        {label: labelConstants.ABOUT_LBL, icon: 'info'}
+      ];
     }
   }
 

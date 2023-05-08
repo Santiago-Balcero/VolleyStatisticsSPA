@@ -9,7 +9,7 @@
       </div>
     </p-dialog>
     <!-- End of modal section -->
-    <h3>Register to be part of Volley Statistics</h3>
+    <h3 class="title mb-16px">Register to enjoy Volley App</h3>
     <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
         <div class="form-group">
             <input type="email" class="form-control" id="email" name="email" formControlName="email" 
@@ -24,8 +24,10 @@
                     placeholder="Select your position" optionValue="val" optionLabel="pos" ></p-dropdown>
             <input type="password" class="form-control" id="password" name="password" formControlName="password" 
                     placeholder="Your password" pInputText />
-            <p>Password must have at least 12 characters, one upper case letter, one lower casse letter and one digit.</p>
-            <button pButton type="submit" class="p-button-rounded" [label]="buttonLabel" [disabled]="registerForm.invalid"></button>
+            <p class="help-text">Password must have at least 12 characters, one upper case letter, one lower casse letter and one digit.</p>
+            <button pButton type="submit" class="p-button-rounded" [label]="buttonLabel" [disabled]="registerForm.invalid">
+                <span class="material-icons-round button log-button">person_add</span>
+            </button>
         </div>
     </form>
   </div>

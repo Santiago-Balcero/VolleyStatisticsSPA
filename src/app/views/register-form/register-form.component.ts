@@ -9,24 +9,17 @@ import { AuthService } from '@services/auth.service';
 @Component({
   selector: 'app-register-form',
   templateUrl: './register-form.component.html',
-  styleUrls: ['./register-form.component.css']
+  styleUrls: ['../../../styles.css']
 })
 export class RegisterFormComponent implements OnInit {
 
   registerForm: FormGroup;
-
   buttonLabel: string = labelConstants.REGISTER_BTN;
-
   categories: Object[] = labelConstants.PLAYER_CATEGORIES;
-
   positions: Object[] = labelConstants.PLAYER_POSITIONS;
-
   displayModal: boolean = false;
-
   displayModalBtn: boolean = false;
-
   modalTitle: string = '';
-
   modalMsg: string = '';
 
   constructor(private readonly formBuilder: FormBuilder, private router: Router, private playerService: PlayerService,

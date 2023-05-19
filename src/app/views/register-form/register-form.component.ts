@@ -18,7 +18,8 @@ export class RegisterFormComponent implements OnInit {
   categories: Object[] = labelConstants.PLAYER_CATEGORIES;
   positions: Object[] = labelConstants.PLAYER_POSITIONS;
 
-  constructor(private readonly formBuilder: FormBuilder,
+  constructor(
+    private readonly formBuilder: FormBuilder,
     private playerService: PlayerService,
     private modalService: ModalService,
     private menuService: MenuService

@@ -21,7 +21,6 @@ export class ModalComponent implements OnInit {
           if (data) {
           console.log('Data received in modal:', data);
           this.data = data;
-          console.log("in if", this.show);
           this.show = true;
         }
       }
@@ -30,9 +29,9 @@ export class ModalComponent implements OnInit {
 
   closeModal(): void {
     // Validate if this was comming from register form to login from this method
-    // use same validation in template to set log in icon in button
+    // use same validation in template to set login icon in button
     this.show = false;
-    this.data = {};
+    this.data = undefined;
   }
 
 }

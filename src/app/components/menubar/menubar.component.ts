@@ -24,20 +24,28 @@ export class MenubarComponent implements OnInit {
     ) {
 }
 
-ngOnInit(): void {
-  this.menuService.getMenuData().subscribe(
-    data => {
-      if (data) {
-        console.log('Data received in menu:', data);
-        this.dataView = data;
+  ngOnInit(): void {
+    this.menuService.getMenuData().subscribe(
+      data => {
+        if (data) {
+          console.log('Data received in menu:', data);
+          this.dataView = data;
+        }
+        this.setMenuItems();
       }
-      this.setMenuItems();
-    }
-  );
-}
+    );
+  }
 
   private setMenuItems(): void {
-    if (this.dataView.currentView === 'main') {
+    if (this.dataView.currentView === 'login' || this.dataView.currentView === 'register'){
+    this.logged = false;
+    this.buttonLabel = this.dataView.currentView === 'register' ? labelConstants.LOGIN_BTN : labelConstants.REGISTER_BTN;
+    this.items = [
+        {label: labelConstants.HOME_LBL, routerLink: '', icon: 'home'},
+        {label: labelConstants.ABOUT_LBL, icon: 'info'}
+    ];
+    }
+    else {
       this.logged = true;
       this.items = [
         {label: labelConstants.HOME_LBL, routerLink: '/main', icon: 'home'},
@@ -47,26 +55,18 @@ ngOnInit(): void {
         {label: labelConstants.SETTINGS_LBL, icon: 'settings'}
       ];
     }
-    else if (this.dataView.currentView === 'login' || this.dataView.currentView === 'register'){
-      this.logged = false;
-      this.buttonLabel = this.dataView.currentView === 'register' ? labelConstants.LOGIN_BTN : labelConstants.REGISTER_BTN;
-      this.items = [
-        {label: labelConstants.HOME_LBL, routerLink: '', icon: 'home'},
-        {label: labelConstants.ABOUT_LBL, icon: 'info'}
-      ];
-    }
   }
-
+  
   onClick(): void {
-    if (this.dataView.currentView === 'main') {
-      this.tokenService.clearData();
-      this.router.navigate(['']);
-    }
-    else if (this.dataView.currentView === 'register') {
+    if (this.dataView.currentView === 'register') {
       this.router.navigate(['']);
     }
     else if (this.dataView.currentView === 'login'){
       this.router.navigate(['register'])
+    }
+    else {
+        this.tokenService.clearData();
+        this.router.navigate(['']);
     }
   }
 

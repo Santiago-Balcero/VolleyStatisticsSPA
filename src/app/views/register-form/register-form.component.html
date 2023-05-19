@@ -3,17 +3,17 @@
     <h3 class="title mb-16px">Register to enjoy Volley App</h3>
     <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
         <div class="form-group">
-            <input type="email" class="form-control" id="email" name="email" formControlName="email" 
+            <input type="email" class="input-text" id="email" name="email" formControlName="email" 
                     placeholder="Your email" (onblur)="checkValid('email')" pInputText />
-            <input type="text" class="form-control" id="firstName" name="firstName" formControlName="firstName" 
+            <input type="text" class="input-text" id="firstName" name="firstName" formControlName="firstName" 
                     placeholder="Your first name" maxlength="30" pInputText />
-            <input type="text" class="form-control" id="lastName" name="lastName" formControlName="lastName" 
+            <input type="text" class="input-text" id="lastName" name="lastName" formControlName="lastName" 
                     placeholder="Your last name" maxlength="30" pInputText />
-            <p-dropdown [options]="categories" class="form-control" id="category" name="category" formControlName="category"
+            <p-dropdown [options]="categories" class="input-dropdown" id="category" name="category" formControlName="category"
                     placeholder="Select your category" optionValue="cat" optionLabel="cat" ></p-dropdown>
-            <p-dropdown [options]="positions" class="form-control" id="position" name="position" formControlName="position"
+            <p-dropdown [options]="positions" class="input-dropdown" id="position" name="position" formControlName="position"
                     placeholder="Select your position" optionValue="val" optionLabel="pos" ></p-dropdown>
-            <input type="password" class="form-control" id="password" name="password" formControlName="password" 
+            <input type="password" class="input-text" id="password" name="password" formControlName="password" 
                     placeholder="Your password" pInputText />
             <p class="help-text">Password must have at least 12 characters, one upper case letter, one lower casse letter and one digit.</p>
             <button pButton type="submit" class="p-button-rounded" [label]="buttonLabel" [disabled]="registerForm.invalid">

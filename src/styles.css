@@ -87,6 +87,7 @@ p {
 .title {
     color: #FFD54F;
     font-family: "Roboto", sans-serif;
+    font-size: 20px;
     margin-top: 0px;
     margin-bottom: 8px;
 }
@@ -99,12 +100,12 @@ p {
     margin-bottom: 16px;
 }
   
-input {
+.input-text {
     margin-bottom: 12px;
     border-radius: 25px;
 }
   
-button {
+.p-button-rounded {
     margin-top: 4px;
     font-family: "Roboto", sans-serif;
     padding: 0.5rem 0.7rem;
@@ -115,10 +116,11 @@ button {
 button.menu-button {
     padding: 0.5rem 0.7rem;
     border: none;
+    margin-top: 0px;
 }
 
 button.main-button {
-    width: 180px;
+    width: 170px;
 }
 
 .p-button:enabled:active {
@@ -131,7 +133,7 @@ button.main-button {
     border: none;
 }
 
-input, p-dropdown {
+.input-text, p-dropdown {
     margin-bottom: 12px;
     border-radius: 25px;
     width: 250px;
@@ -200,14 +202,14 @@ input, p-dropdown {
     width: 60px;
 }
 
-:host ::ng-deep .p-dropdown {
+.p-dropdown {
     border-radius: 25px;
 }
   
-:host ::ng-deep .p-dropdown-label {
+.input-dropdown .p-dropdown-label {
     width: 210px;
 }
-  
+
 .alert {
     font-family: "Roboto", sans-serif;
     font-size: 12px;
@@ -216,7 +218,7 @@ input, p-dropdown {
   
 .info-text {
     font-family: "Roboto", sans-serif;
-    font-size: small;
+    font-size: 16px;
     color: #ffffffe0;
     width: 250px;
     margin-top: 0px;

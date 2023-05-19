@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
-import { map } from 'rxjs/operators';
+import { map, last } from 'rxjs/operators';
 import { environment } from "@environments/environment";
 import { NewPlayer } from "@models/newPlayer.model";
 import { checkToken } from "@interceptors/auth.interceptor";
@@ -99,7 +99,8 @@ export class PlayerService {
       lastName: player.lastName,
       category: player.category,
       position: player.position,
-      email: player.email
+      email: player.email,
+      playerCreationDateTime: player.playerCreationDateTime
     })
   }
 

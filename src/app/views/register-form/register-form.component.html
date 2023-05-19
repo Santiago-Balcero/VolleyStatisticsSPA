@@ -1,14 +1,5 @@
-<app-menubar></app-menubar>
 <div class="container">
   <div class="row">
-    <!-- Modal section -->
-    <p-dialog position="top" [header]="modalTitle" [(visible)]="displayModal" [style]="{width: '250px'}" (onHide)="toLogin()">
-      {{modalMsg}}
-      <div class="footer" *ngIf="displayModalBtn">
-        <button pButton class="p-button-rounded" label="Continue" (click)="continue()"></button>
-      </div>
-    </p-dialog>
-    <!-- End of modal section -->
     <h3 class="title mb-16px">Register to enjoy Volley App</h3>
     <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
         <div class="form-group">

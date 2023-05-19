@@ -11,7 +11,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private tokenService: TokenService) { }
 
-  loginUrlApi: string = `${environment.API_URL}/access`;
+  loginUrlApi: string = `${environment.API_URL}/auth`;
 
   login(email: string, password: string): Observable<any> {
     let formData: FormData = new FormData();

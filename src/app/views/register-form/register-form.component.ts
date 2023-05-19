@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { labelConstants } from '@constants/labels.constants';
-import { Router } from '@angular/router';
 import { PlayerService } from '@services/player.service';
 import { NewPlayer } from '@models/newPlayer.model';
-import { AuthService } from '@services/auth.service';
+import { ModalService } from '@services/modal.service';
+import { MenuService } from '../../services/menu.service';
 
 @Component({
   selector: 'app-register-form',
@@ -17,13 +17,12 @@ export class RegisterFormComponent implements OnInit {
   buttonLabel: string = labelConstants.REGISTER_BTN;
   categories: Object[] = labelConstants.PLAYER_CATEGORIES;
   positions: Object[] = labelConstants.PLAYER_POSITIONS;
-  displayModal: boolean = false;
-  displayModalBtn: boolean = false;
-  modalTitle: string = '';
-  modalMsg: string = '';
 
-  constructor(private readonly formBuilder: FormBuilder, private router: Router, private playerService: PlayerService,
-    private authService: AuthService) {
+  constructor(private readonly formBuilder: FormBuilder,
+    private playerService: PlayerService,
+    private modalService: ModalService,
+    private menuService: MenuService
+    ) {
       this.registerForm = this.formBuilder.group({
         email: ['', [Validators.required, Validators.email]],
         firstName: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(30)]],
@@ -35,6 +34,7 @@ export class RegisterFormComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.menuService.sendMenuData({currentView: 'register'});
   }
 
   onSubmit(): void {
@@ -43,16 +43,11 @@ export class RegisterFormComponent implements OnInit {
     this.playerService.registerNewPlayer(newPlayer).subscribe({
       next: (result) => {
         console.log(result);
-        this.modalTitle = 'Welcome to Volley Statistics';
-        this.modalMsg = result;
-        this.displayModal = true;
-        this.displayModalBtn = true;
+        this.modalService.showModal(result, 'success');
       },
       error: (error) => {
         console.log(error);
-        this.modalTitle = 'Registration error';
-        this.modalMsg = error.error.detail;
-        this.displayModal = true;
+        this.modalService.showModal(error.error, 'error');
       }
     });
   }
@@ -61,22 +56,6 @@ export class RegisterFormComponent implements OnInit {
     if (this.registerForm.get(field)?.invalid) {
       console.log(`Field ${field} is invalid`, this.registerForm.get(field)?.errors);
     }
-  }
-
-  continue(): void {
-    this.authService.login(this.registerForm.get('email')!.value, this.registerForm.get('password')!.value).subscribe({
-      next: () => {
-        this.router.navigate(['main']);
-      },
-      error: (error) => {
-        console.log(error.error.detail);
-        this.router.navigate(['']);
-      }
-    });
-  }
-  
-  toLogin(): void {
-    this.router.navigate(['']);
   }
 
 }

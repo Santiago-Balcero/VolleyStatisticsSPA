@@ -3,6 +3,8 @@ import { PlayerService } from '@services/player.service';
 import { Router } from '@angular/router';
 import { StarRatingService } from '../../services/star-rating.service';
 import { labelConstants } from '@constants/labels.constants';
+import { ModalService } from '@services/modal.service';
+import { MenuService } from '@services/menu.service';
 
 @Component({
   selector: 'app-player-main',
@@ -18,11 +20,14 @@ export class PlayerMainComponent implements OnInit {
   constructor(
     private playerService: PlayerService,
     private router: Router,
-    private starService: StarRatingService 
+    private starService: StarRatingService,
+    private modalService: ModalService,
+    private menuService: MenuService
   ) { }
     
   ngOnInit(): void {
     this.loading = true;
+    this.menuService.sendMenuData({currentView: 'main'});
     this.buttonLabel = labelConstants.START_GAME_LBL;
     this.getPlayerData();
   }
@@ -38,6 +43,7 @@ export class PlayerMainComponent implements OnInit {
       error: (error) => {
         console.log(error);
         this.loading = false;
+        this.modalService.showModal(error.error, 'error');
         this.router.navigate(['']);
       }
     });
@@ -48,6 +54,7 @@ export class PlayerMainComponent implements OnInit {
     this.router.navigate(['/account']);
   }
 
+  // DELETE
   ja() {
     this.player.totalEffectiveness -= 0.1
     this.starService.showStars(Math.round(this.player.totalEffectiveness * 100) / 100)

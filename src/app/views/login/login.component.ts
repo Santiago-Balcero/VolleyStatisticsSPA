@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { labelConstants } from '@constants/labels.constants';
 import { AuthService } from '@services/auth.service';
 import { Router } from '@angular/router';
+import { ModalService } from '@services/modal.service';
+import { MenuService } from '../../services/menu.service';
 
 @Component({
   selector: 'app-login',
@@ -13,11 +15,14 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   buttonLabel: string = labelConstants.LOGIN_BTN;
-  displayModal: boolean = false;
-  errorMsg: string = '';
 
-  constructor(private readonly formBuilder: FormBuilder, private authService: AuthService,
-    private router: Router) {
+  constructor(
+    private readonly formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private modalService: ModalService,
+    private menuService: MenuService
+    ) {
       this.loginForm = this.formBuilder.group({
         username: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required]]
@@ -25,6 +30,7 @@ export class LoginComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.menuService.sendMenuData({currentView: 'login'});
   }
 
   onSubmit(): void {
@@ -36,8 +42,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['main']);
       },
       error: (error) => {
-        this.errorMsg = error.error.detail;
-        this.displayModal = true;
+        console.log('Error:', error.error);
+        this.modalService.showModal(error.error, 'error');
       }
     });
   }

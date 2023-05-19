@@ -11,10 +11,10 @@
         <p class="menu-label">Log out</p>
     </div>
   </ng-template>
-  <ng-template *ngIf="!logged" pTemplate="end">
+  <div *ngIf="!logged">
     <button pButton [label]="buttonLabel" class="p-button-rounded menu-button" (click)="onClick()">
         <span *ngIf="buttonLabel === 'Log in'" class="material-icons-round button log-button">login</span>
         <span *ngIf="buttonLabel === 'Register'" class="material-icons-round button log-button">person_add</span>
     </button>
-  </ng-template>
-</p-menubar>
+</div>
+</p-menubar>  

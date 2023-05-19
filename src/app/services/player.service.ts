@@ -21,9 +21,9 @@ export class PlayerService {
   
   // Add {context: checkToken()} to every method on which token is needed
   getPlayerById(): Observable<any> {
-    return this.http.get(`${this.playersUrlApi}/player`, {context: checkToken()}).pipe(
-        map(player => (
-            this.toFrontPlayer(player)
+    return this.http.get<{data: any, detail: any}>(`${this.playersUrlApi}/player`, {context: checkToken()}).pipe(
+        map(response => (
+            this.toFrontPlayer(response.data)
         ))
     );
   }

@@ -11,7 +11,7 @@ export class StarRatingService {
     constructor() { }
 
     showStars(effectiveness: number): void {
-        this.showPerformance.next(effectiveness)
+        this.showPerformance.next(effectiveness);
     }
 
     getStars(): Observable<any> {

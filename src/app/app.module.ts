@@ -6,7 +6,6 @@ import { ButtonModule } from 'primeng/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,6 +19,7 @@ import { PlayerTeamsComponent } from './views/player-teams/player-teams.componen
 import { StarRatingComponent } from './components/star-rating/star-rating.component';
 import { EditPlayerComponent } from './views/edit-player/edit-player.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     PlayerTeamsComponent,
     StarRatingComponent,
     EditPlayerComponent,
-    LoaderComponent
+    LoaderComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +43,6 @@ import { LoaderComponent } from './components/loader/loader.component';
     ReactiveFormsModule,
     InputTextModule,
     HttpClientModule,
-    DialogModule,
     DropdownModule
   ],
   providers: [

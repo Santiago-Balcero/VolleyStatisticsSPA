@@ -9,12 +9,12 @@ import { PrimeNGConfig } from 'primeng/api';
 })
 export class AppComponent implements OnInit {
 
-  title = 'VolleyStatistics';
+  title = 'VolleyApp';
 
   constructor(private primengConfig: PrimeNGConfig, private router: Router) {}
 
   ngOnInit(): void {
-      this.primengConfig.ripple = true;
+    this.primengConfig.ripple = true;  
   }
   
 }

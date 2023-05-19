@@ -2,6 +2,9 @@ npm i jwt-decode
 npm i typescript-cookie
 
 # TO DO
+- Fix menu
+- Buttons in player main: play game only if there is a team, create team goes always
+- Method for login from modal after register, with a boolean?
 - Edit account form -> show info, edit button with edit icon for each value
 - Change alerts for modal as in D
 - About page

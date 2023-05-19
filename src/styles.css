@@ -262,7 +262,7 @@ input, p-dropdown {
 
 .material-icons-round.loader {
     color: #ffffff70;
-    scale: 2.5;
+    scale: 2;
     animation: size 0.5s 1, colors 1s infinite;
 }
 
@@ -273,7 +273,7 @@ input, p-dropdown {
 
 @keyframes size {
     from {scale: 1;}
-    to {scale: 2.5;}
+    to {scale: 2;}
 }
 
 @keyframes colors {
@@ -285,11 +285,11 @@ input, p-dropdown {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
-    left: 50%;
-    top: 50%;
     background: #121212;
 }
 

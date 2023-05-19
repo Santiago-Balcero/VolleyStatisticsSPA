@@ -14,7 +14,8 @@ import { MenuService } from '@services/menu.service';
 export class PlayerMainComponent implements OnInit {
     
   player: any = null;
-  buttonLabel: string = '';
+  newGameButtonLabel: string = '';
+  newTeamButtonLabel: string = '';
   loading: boolean = false;
 
   constructor(
@@ -28,7 +29,8 @@ export class PlayerMainComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
     this.menuService.sendMenuData({currentView: 'main'});
-    this.buttonLabel = labelConstants.START_GAME_LBL;
+    this.newGameButtonLabel = labelConstants.START_GAME_LBL;
+    this.newTeamButtonLabel = labelConstants.NEW_TEAM_LBL;
     this.getPlayerData();
   }
 

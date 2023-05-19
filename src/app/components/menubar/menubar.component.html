@@ -1,4 +1,4 @@
-<p-menubar class="menu">
+<p-menubar class="menu" [ngClass]="{'logged-in': logged}">
   <ng-template pTemplate="start" class="menuStart">
     <ng-container *ngFor="let item of items">
         <div class="menu-item" [routerLink]="item.routerLink">

@@ -109,11 +109,16 @@ button {
     font-family: "Roboto", sans-serif;
     padding: 0.5rem 0.7rem;
     border: none;
+    margin-top: 12px;
 }
 
 button.menu-button {
     padding: 0.5rem 0.7rem;
     border: none;
+}
+
+button.main-button {
+    width: 180px;
 }
 
 .p-button:enabled:active {
@@ -146,6 +151,10 @@ input, p-dropdown {
     justify-content: space-evenly;
     font-size: small;
     width: inherit;
+}
+
+.logged-in {
+    width: 100%;
 }
 
 .p-menubar-end.ng-star-inserted {
@@ -182,6 +191,7 @@ input, p-dropdown {
 
 .menu-item.wd-80px {
     width: 80px;
+    margin-top: 4px;
 }
 
 .menu-label {
@@ -263,7 +273,7 @@ input, p-dropdown {
 .material-icons-round.loader {
     color: #ffffff70;
     scale: 2;
-    animation: size 0.5s 1, colors 1s infinite;
+    animation: size 1s 1, colors 1.5s infinite;
 }
 
 .material-icons-round.modal-icon {

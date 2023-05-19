@@ -8,6 +8,7 @@ export const labelConstants = {
   MY_GAMES_LBL: 'Games',
   SETTINGS_LBL: 'Settings',
   START_GAME_LBL: 'Start new game',
+  NEW_TEAM_LBL : 'Create new team',
   PLAYER_CATEGORIES: [{cat: 'Men'}, {cat: 'Women'}],
   PLAYER_POSITIONS: [{pos: 'Outside Hitter', val: 'OH'},
                       {pos: 'Setter', val: 'S'},

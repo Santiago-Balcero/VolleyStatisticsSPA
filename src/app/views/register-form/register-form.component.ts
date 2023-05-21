@@ -5,6 +5,7 @@ import { PlayerService } from '@services/player.service';
 import { NewPlayer } from '@models/newPlayer.model';
 import { ModalService } from '@services/modal.service';
 import { MenuService } from '../../services/menu.service';
+import { ToDo, Type } from '@models/modalData.model';
 
 @Component({
   selector: 'app-register-form',
@@ -44,11 +45,24 @@ export class RegisterFormComponent implements OnInit {
     this.playerService.registerNewPlayer(newPlayer).subscribe({
       next: (result) => {
         console.log(result);
-        this.modalService.showModal(result, 'success');
+        this.modalService.showModal({
+            data: {
+                email: newPlayer.email,
+                password: newPlayer.password
+            },
+            message: result.detail ? result.detail : '',
+            toDo: ToDo.logIn,
+            type: Type.success
+        });
       },
       error: (error) => {
         console.log(error);
-        this.modalService.showModal(error.error, 'error');
+        this.modalService.showModal({
+            data: {},
+            message: error.error.detail,
+            toDo: ToDo.ok,
+            type: Type.error
+        });
       }
     });
   }

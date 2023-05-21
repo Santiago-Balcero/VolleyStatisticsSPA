@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '@services/player.service';
 import { labelConstants } from '@constants/labels.constants';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ModalService } from '@services/modal.service';
+import { Type, ToDo } from '@models/modalData.model';
 
 @Component({
   selector: 'app-edit-player',
@@ -25,6 +27,7 @@ export class EditPlayerComponent implements OnInit {
   constructor(
     private playerService: PlayerService,
     private readonly formBuilder: FormBuilder,
+    private modalService: ModalService
   ) {
     this.editForm = this.formBuilder.group({
         email: ['', [Validators.required, Validators.email]],
@@ -39,10 +42,10 @@ export class EditPlayerComponent implements OnInit {
     this.loading = true;
     this.editAccountBtnLabel = labelConstants.EDIT_ACCOUNT_LBL;
     this.deleteAccountBtnLabel = labelConstants.DELETE_ACCOUNT_LBL;
-    this.saveAccountChangesBtnLabel = labelConstants.SAVE_ACCOUNT_CHANGES_LBL;
-    this.cancelAccountChangesBtnLabel = labelConstants.CANCEL_ACCOUNT_CHANGES_LBL;
+    this.saveAccountChangesBtnLabel = labelConstants.SAVE_BTN;
+    this.cancelAccountChangesBtnLabel = labelConstants.CANCEL_BTN;
     this.playerService.getPlayerToUpdate().subscribe(
-      data => {
+      (data) => {
         if (data.firstName) {
             console.log('Player data received from observable:', data);
             this.player = data;
@@ -50,10 +53,9 @@ export class EditPlayerComponent implements OnInit {
         }
         else {
             this.playerService.getPlayerById().subscribe(
-                data => {
-                    console.log('Player data received from new request:', data);
-                    this.player = data;
-                    this.loading = false;
+                (result) => {
+                    console.log('Player data received from new request:', result);
+                    this.playerService.editPlayerObservable(result);
                 }
             )
         }
@@ -76,25 +78,24 @@ export class EditPlayerComponent implements OnInit {
 
   }
 
-  inputKeyChange(control: string) {
-   
-  }
-
   editAccount(): void {
     this.setFormValues();
     this.edit = true;
   }
 
   saveChanges(): void {
-    console.log('Saving changes')
+    this.modalService.showModal({
+        data: this.editForm.value,
+        message: 'Save changes?',
+        toDo: ToDo.editAccount,
+        type: Type.question
+    });
+    this.cancelChanges();
   }
 
   cancelChanges(): void {
     this.edit = false;
     this.inputHasChanged = false;
-    for (let control of Object.keys(this.editForm.controls)) {
-        this.editForm.controls[control].setValue('');
-    }
   }
 
   checkValid(field: string): void {

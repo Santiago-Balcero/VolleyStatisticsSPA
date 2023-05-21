@@ -5,6 +5,8 @@ import { AuthService } from '@services/auth.service';
 import { Router } from '@angular/router';
 import { ModalService } from '@services/modal.service';
 import { MenuService } from '../../services/menu.service';
+import { ToDo, Type } from '@models/modalData.model';
+import { iconConstants } from '@constants/icons.constants';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +16,8 @@ import { MenuService } from '../../services/menu.service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  buttonLabel: string = labelConstants.LOGIN_BTN;
+  buttonLabel: string = '';
+  buttonIcon: string = '';
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -31,6 +34,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.menuService.sendMenuData({currentView: 'login'});
+    this.buttonLabel = labelConstants.LOG_IN_BTN;
+    this.buttonIcon = iconConstants.LOG_IN;
   }
 
   onSubmit(): void {
@@ -43,7 +48,12 @@ export class LoginComponent implements OnInit {
       },
       error: (error) => {
         console.log('Error:', error.error);
-        this.modalService.showModal(error.error, 'error');
+        this.modalService.showModal({
+            data: {},
+            message: error.error.detail,
+            toDo: ToDo.ok,
+            type: Type.error
+        });
       }
     });
   }

@@ -8,7 +8,7 @@
             <input type="password" class="input-text" id="password" name="password" formControlName="password" 
                     placeholder="Your password" pInputText />
             <button pButton type="submit" class="p-button-rounded" [label]="buttonLabel" [disabled]="loginForm.invalid">
-                <span *ngIf="buttonLabel === 'Log in'" class="material-icons-round button log-button">login</span>
+                <span *ngIf="buttonLabel === 'Log in'" class="material-icons-round button log-button">{{ buttonIcon }}</span>
             </button>
         </div>
     </form>

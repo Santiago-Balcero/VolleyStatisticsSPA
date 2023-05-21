@@ -113,6 +113,10 @@ p {
     margin-top: 12px;
 }
 
+.p-button-rounded.in-modal {
+    width: 100px;
+}
+
 button.menu-button {
     padding: 0.5rem 0.7rem;
     border: none;
@@ -312,7 +316,7 @@ button.main-button {
     flex-direction: column;
     width: 100vw;
     height: 100vh;
-    background: #121212c9;
+    background: #121212dc;
     overflow: hidden;
     position: fixed;
     top: 0;
@@ -382,5 +386,7 @@ button.main-button {
 }
 
 .modal-button {
-    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }

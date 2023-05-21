@@ -5,6 +5,7 @@ import { StarRatingService } from '../../services/star-rating.service';
 import { labelConstants } from '@constants/labels.constants';
 import { ModalService } from '@services/modal.service';
 import { MenuService } from '@services/menu.service';
+import { ToDo, Type } from '@models/modalData.model';
 
 @Component({
   selector: 'app-player-main',
@@ -45,21 +46,20 @@ export class PlayerMainComponent implements OnInit {
       error: (error) => {
         console.log(error);
         this.loading = false;
-        this.modalService.showModal(error.error, 'error');
+        this.modalService.showModal({
+            data: {},
+            message: error.error,
+            toDo: ToDo.ok,
+            type: Type.error
+        });
         this.router.navigate(['']);
       }
     });
   }
 
   editPlayer(): void {
-    this.playerService.editPlayer(this.player);
+    this.playerService.editPlayerObservable(this.player);
     this.router.navigate(['/account']);
-  }
-
-  // DELETE
-  ja() {
-    this.player.totalEffectiveness -= 0.1
-    this.starService.showStars(Math.round(this.player.totalEffectiveness * 100) / 100)
   }
 
 }

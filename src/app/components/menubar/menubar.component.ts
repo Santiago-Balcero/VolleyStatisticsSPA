@@ -39,7 +39,7 @@ export class MenubarComponent implements OnInit {
   private setMenuItems(): void {
     if (this.dataView.currentView === 'login' || this.dataView.currentView === 'register'){
     this.logged = false;
-    this.buttonLabel = this.dataView.currentView === 'register' ? labelConstants.LOGIN_BTN : labelConstants.REGISTER_BTN;
+    this.buttonLabel = this.dataView.currentView === 'register' ? labelConstants.LOG_IN_BTN : labelConstants.REGISTER_BTN;
     this.items = [
         {label: labelConstants.HOME_LBL, routerLink: '', icon: 'home'},
         {label: labelConstants.ABOUT_LBL, icon: 'info'}

@@ -2,17 +2,20 @@
   <div class="modal">
       <div class="modal-header">
         <div class="modal-icon">
-          <span *ngIf="data.type === 'error'" class="material-icons-round modal-icon">sentiment_very_dissatisfied</span>
-          <span *ngIf="data.type === 'success'" class="material-icons-round modal-icon">mood</span>
+          <span class="material-icons-round modal-icon">{{ modalIcon }}</span>
         </div>
       </div>
       <div class="modal-body">
-        <p class="modal-title">{{data.message}}</p>
+        <p class="modal-title">{{ modalData.message }}</p>
       </div>
       <div class="modal-button">
-        <button pButton type="submit" class="p-button-rounded" label="Ok" (click)="closeModal()">
-          <span class="material-icons-round button log-button">done</span>
+        <button pButton type="submit" class="p-button-rounded in-modal" [label]="btn1Label" (click)="btn1Action()">
+          <span class="material-icons-round button log-button">{{ btn1Icon }}</span>
         </button>
+        <button *ngIf="secondBtn" pButton type="submit" class="p-button-rounded in-modal" [label]="btn2Label" (click)="btn2Action()">
+            <span class="material-icons-round button log-button">{{ btn2Icon }}</span>
+          </button>
       </div>
     </div>
 </div>
+<app-loader [show]="loading"></app-loader>

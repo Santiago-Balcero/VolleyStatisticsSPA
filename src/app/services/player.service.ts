@@ -6,6 +6,7 @@ import { environment } from "@environments/environment";
 import { NewPlayer } from "@models/newPlayer.model";
 import { checkToken } from "@interceptors/auth.interceptor";
 import { Player } from '../models/player.model';
+import { ApiResponse } from "@models/apiResponse.models";
 
 
 @Injectable({
@@ -21,7 +22,7 @@ export class PlayerService {
   
   // Add {context: checkToken()} to every method on which token is needed
   getPlayerById(): Observable<any> {
-    return this.http.get<{data: any, detail: any}>(`${this.playersUrlApi}/player`, {context: checkToken()}).pipe(
+    return this.http.get<ApiResponse>(`${this.playersUrlApi}/player`, {context: checkToken()}).pipe(
         map(response => (
             this.toFrontPlayer(response.data)
         ))
@@ -29,7 +30,11 @@ export class PlayerService {
   }
 
   registerNewPlayer(newPlayer: NewPlayer): Observable<any> {
-    return this.http.post(this.playersUrlApi, this.toBackNewPlayer(newPlayer));
+    return this.http.post<ApiResponse>(this.playersUrlApi, this.toBackNewPlayer(newPlayer));
+  }
+
+  editPlayer(editPlayer: any): Observable<any> {
+        return this.http.put<ApiResponse>(this.playersUrlApi, this.toBackEditPlayer(editPlayer), {context: checkToken()});
   }
 
   private toBackNewPlayer(newPlayer: NewPlayer): any {
@@ -40,6 +45,16 @@ export class PlayerService {
         position: newPlayer.position,
         email: newPlayer.email,
         password: newPlayer.password
+    }
+  }
+
+  private toBackEditPlayer(player: any): any {
+    return {
+        first_name: player.firstName,
+        last_name: player.lastName,
+        category: player.category,
+        position: player.position,
+        email: player.email
     }
   }
 
@@ -93,7 +108,7 @@ export class PlayerService {
     }
   }
 
-  editPlayer(player: Player): void {
+  editPlayerObservable(player: Player): void {
     this.playerToEdit.next({
       firstName: player.firstName,
       lastName: player.lastName,

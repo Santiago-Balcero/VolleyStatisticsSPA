@@ -2,8 +2,8 @@ npm i jwt-decode
 npm i typescript-cookie
 
 # TO DO
-- Edit account: modal for save changes, modal for delete account
-- Register user: modal for confirmation message and login
+- Modal for delete account
+- Change icons in templates for iconConstants
 - View detailed statistics in player main info
 - Teams component
 - Pipe for player position display

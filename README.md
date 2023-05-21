@@ -4,6 +4,7 @@ npm i typescript-cookie
 # TO DO
 - Modal for delete account
 - Change icons in templates for iconConstants
+- Update password
 - View detailed statistics in player main info
 - Teams component
 - Pipe for player position display

@@ -11,6 +11,7 @@ export enum Type {
     question = 'question',
     warning = 'warning',
     logIn = 'log in',
+    sad = 'sad',
     none = ''
 }
 

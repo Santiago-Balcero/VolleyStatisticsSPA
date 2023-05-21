@@ -1,12 +1,13 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable, tap } from "rxjs";
 import { map, last } from 'rxjs/operators';
 import { environment } from "@environments/environment";
 import { NewPlayer } from "@models/newPlayer.model";
 import { checkToken } from "@interceptors/auth.interceptor";
 import { Player } from '../models/player.model';
 import { ApiResponse } from "@models/apiResponse.models";
+import { TokenService } from './token.service';
 
 
 @Injectable({
@@ -16,7 +17,10 @@ export class PlayerService {
   
   private playerToEdit = new BehaviorSubject<any>({});
   
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private tokenService: TokenService
+  ) { }
   
   playersUrlApi: string = `${environment.API_URL}/players`;
   
@@ -35,6 +39,15 @@ export class PlayerService {
 
   editPlayer(editPlayer: any): Observable<any> {
         return this.http.put<ApiResponse>(this.playersUrlApi, this.toBackEditPlayer(editPlayer), {context: checkToken()});
+  }
+
+  deletePlayer(): Observable<any> {
+    return this.http.delete<ApiResponse>(`${this.playersUrlApi}/delete`, {context: checkToken()}).pipe(
+        tap(() => {
+            // Clears data since account is no longer available
+            this.tokenService.clearData();
+        })
+    );
   }
 
   private toBackNewPlayer(newPlayer: NewPlayer): any {

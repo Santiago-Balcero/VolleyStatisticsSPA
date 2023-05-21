@@ -104,4 +104,13 @@ export class EditPlayerComponent implements OnInit {
     }
   }
 
+  deleteAccount(): void {
+    this.modalService.showModal({
+        data: {},
+        message: 'Are you sure you want to delete your account?',
+        toDo: ToDo.deleteAccount,
+        type: Type.warning
+    });
+  }
+
 }

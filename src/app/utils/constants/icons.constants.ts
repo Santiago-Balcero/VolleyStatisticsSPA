@@ -4,5 +4,7 @@ export const iconConstants = {
     ERROR: 'sentiment_very_dissatisfied',
     LOG_IN: 'login',
     QUESTION: 'help_outline',
-    CANCEL: 'close'
+    CANCEL: 'close',
+    WARNING: 'warning_amber',
+    SAD: 'sentiment_dissatisfied'
 }

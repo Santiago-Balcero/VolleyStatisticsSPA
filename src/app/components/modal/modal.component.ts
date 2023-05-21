@@ -36,9 +36,10 @@ export class ModalComponent implements OnInit {
     private router: Router
   ) { }
 
-  // Modal must receive data.type 'error', 'success', 'question', 'warning', 'log in'
-  // Modal can receive data.toDo 'ok', 'log in', 'edit account', 'delete account' and others...
-  // data.toDo is used to know which action to ber performed after buttons clicks 
+  // Modal must receive data.type
+  // modalData.type is used to know which icon to display
+  // Modal must receive data.toDo
+  // modalData.toDo is used to know which action to do after buttons clicks 
 
   ngOnInit(): void {
     this.modalService.getModal().subscribe(
@@ -64,6 +65,12 @@ export class ModalComponent implements OnInit {
                 this.secondBtn = true;
                 break;
             case ToDo.deleteAccount:
+                this.btn1Label = labelConstants.OK_BTN;
+                this.btn1Icon = iconConstants.DONE;
+                this.btn2Label = labelConstants.CANCEL_BTN;
+                this.btn2Icon = iconConstants.CANCEL;
+                this.secondBtn = true;
+                break;
             case ToDo.none:
           }
           // Set modal icon
@@ -78,7 +85,12 @@ export class ModalComponent implements OnInit {
                 this.modalIcon = iconConstants.QUESTION;
                 break;
             case Type.warning:
+                this.modalIcon = iconConstants.WARNING;
+                break;
             case Type.logIn:
+            case Type.sad:
+                this.modalIcon = iconConstants.SAD;
+                break;
             case Type.none:
           }
           this.show = true;
@@ -109,7 +121,6 @@ export class ModalComponent implements OnInit {
             break;
         case ToDo.editAccount:
             this.loading = true;
-            console.log(this.modalData.data)
             this.playerService.editPlayer(this.modalData.data).subscribe({
                 next: (result) => {
                     this.modalService.showModal({
@@ -134,6 +145,29 @@ export class ModalComponent implements OnInit {
             });
             break;
         case ToDo.deleteAccount:
+            this.loading = true;
+            this.playerService.deletePlayer().subscribe({
+                next: (result) => {
+                    this.modalService.showModal({
+                        data: {},
+                        message: result.detail,
+                        toDo: ToDo.ok,
+                        type: Type.sad
+                    });
+                    this.loading = false;
+                    this.router.navigate(['']);
+                },
+                error: (error) => {
+                    console.log('Error:', error.error);
+                    this.modalService.showModal({
+                        data: {},
+                        message: error.error.detail,
+                        toDo: ToDo.ok,
+                        type: Type.error
+                    });
+                    this.loading = false;
+                }
+            });
     }
     this.clearData();
     this.show = false;

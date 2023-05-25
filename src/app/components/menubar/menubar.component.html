@@ -7,14 +7,13 @@
         </div>
     </ng-container>
     <div *ngIf="logged" class="menu-item" (click)="onClick()">
-        <span class="material-icons-round menu-icon">logout</span>
-        <p class="menu-label">Log out</p>
+        <span class="material-icons-round menu-icon">{{ logoutIcon }}</span>
+        <p class="menu-label">{{ logoutLabel }}</p>
     </div>
   </ng-template>
   <div *ngIf="!logged">
     <button pButton [label]="buttonLabel" class="p-button-rounded menu-button" (click)="onClick()">
-        <span *ngIf="buttonLabel === 'Log in'" class="material-icons-round button log-button">login</span>
-        <span *ngIf="buttonLabel === 'Register'" class="material-icons-round button log-button">person_add</span>
+        <span class="material-icons-round button log-button">{{ buttonIcon }}</span>
     </button>
 </div>
 </p-menubar>

@@ -4,6 +4,7 @@ import { labelConstants } from '@constants/labels.constants';
 import { Router } from '@angular/router';
 import { TokenService } from '@services/token.service';
 import { MenuService } from '@services/menu.service';
+import { iconConstants } from '@constants/icons.constants';
 
 @Component({
   selector: 'app-menubar',
@@ -14,8 +15,11 @@ export class MenubarComponent implements OnInit {
 
   items: MenuItem[] = [];
   buttonLabel: string = '';
+  buttonIcon: string = '';
   logged: boolean = false;
   dataView: any = {};
+  logoutLabel: string = '';
+  logoutIcon: string = '';
   
   constructor(
     private router: Router,
@@ -25,6 +29,8 @@ export class MenubarComponent implements OnInit {
 }
 
   ngOnInit(): void {
+    this.logoutLabel = labelConstants.LOG_OUT_BTN;
+    this.logoutIcon = iconConstants.LOG_OUT;
     this.menuService.getMenuData().subscribe(
       data => {
         if (data) {
@@ -40,6 +46,7 @@ export class MenubarComponent implements OnInit {
     if (this.dataView.currentView === 'login' || this.dataView.currentView === 'register'){
     this.logged = false;
     this.buttonLabel = this.dataView.currentView === 'register' ? labelConstants.LOG_IN_BTN : labelConstants.REGISTER_BTN;
+    this.buttonIcon = this.dataView.currentView === 'register' ? iconConstants.LOG_IN : iconConstants.CREATE_PLAYER;
     this.items = [
         {label: labelConstants.HOME_LBL, routerLink: '', icon: 'home'},
         {label: labelConstants.ABOUT_LBL, icon: 'info'}

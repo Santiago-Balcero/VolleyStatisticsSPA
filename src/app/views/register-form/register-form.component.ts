@@ -6,6 +6,8 @@ import { NewPlayer } from '@models/newPlayer.model';
 import { ModalService } from '@services/modal.service';
 import { MenuService } from '../../services/menu.service';
 import { ToDo, Type } from '@models/modalData.model';
+import { textConstants } from '@constants/text.constants';
+import { iconConstants } from '@constants/icons.constants';
 
 @Component({
   selector: 'app-register-form',
@@ -15,7 +17,9 @@ import { ToDo, Type } from '@models/modalData.model';
 export class RegisterFormComponent implements OnInit {
 
   registerForm: FormGroup;
-  buttonLabel: string = labelConstants.REGISTER_BTN;
+  passwordHelper: string = '';
+  buttonLabel: string = '';
+  buttonIcon: string = '';
   categories: Object[] = labelConstants.PLAYER_CATEGORIES;
   positions: Object[] = labelConstants.PLAYER_POSITIONS;
 
@@ -37,6 +41,9 @@ export class RegisterFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.menuService.sendMenuData({currentView: 'register'});
+    this.buttonLabel = labelConstants.REGISTER_BTN;
+    this.buttonIcon = iconConstants.CREATE_PLAYER;
+    this.passwordHelper = textConstants.PASSWORD_HELP;
   }
 
   onSubmit(): void {

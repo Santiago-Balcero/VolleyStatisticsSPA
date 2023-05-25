@@ -1,4 +1,5 @@
 import { Component, Input, Output, OnInit } from '@angular/core';
+import { iconConstants } from '@constants/icons.constants';
 import { StarRatingService } from '@services/star-rating.service';
 import { BehaviorSubject } from 'rxjs';
 
@@ -13,12 +14,18 @@ export class StarRatingComponent implements OnInit {
   
   effectiveness = 0;
   stars: string = '';
+  starEmpty: string = '';
+  starHalf: string = '';
+  starFull: string = '';
 
   constructor(
     private starService: StarRatingService
   ) { }
 
   ngOnInit(): void {
+    this.starEmpty = iconConstants.STAR_EMPTY;
+    this.starHalf = iconConstants.STAR_HALF;
+    this.starFull = iconConstants.STAR_FULL;
     this.starService.getStars().subscribe(
       data => {
         console.log('Data received to stars rating:', data);

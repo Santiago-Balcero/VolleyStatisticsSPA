@@ -4,6 +4,8 @@ import { labelConstants } from '@constants/labels.constants';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalService } from '@services/modal.service';
 import { Type, ToDo } from '@models/modalData.model';
+import { iconConstants } from '@constants/icons.constants';
+import { textConstants } from '@constants/text.constants';
 
 @Component({
   selector: 'app-edit-player',
@@ -15,15 +17,24 @@ export class EditPlayerComponent implements OnInit {
   player: any = null;
   loading: boolean = false;
   editAccountBtnLabel: string = '';
+  editAccountBtnIcon: string = '';
   deleteAccountBtnLabel: string = '';
+  deleteAccountBtnIcon: string = '';
   saveAccountChangesBtnLabel: string = '';
+  saveAccountChangesBtnIcon: string = '';
   cancelAccountChangesBtnLabel: string = '';
+  cancelAccountChangesBtnIcon: string = '';
+  changePasswordLabel: string = '';
+  changePasswordIcon: string = '';
+  passwordHelper: string = '';
+  saveBtnIcon: string = '';
+  cancelBtnIcon: string = '';
   edit: boolean = false;
   editPass: boolean = false;
   editForm: FormGroup;
   passwordForm: FormGroup;
-  categories: Object[] = labelConstants.PLAYER_CATEGORIES;
-  positions: Object[] = labelConstants.PLAYER_POSITIONS;
+  categories: Object[] = [];
+  positions: Object[] = [];
   inputHasChanged: boolean = false;
 
   constructor(
@@ -46,10 +57,19 @@ export class EditPlayerComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
+    this.changePasswordLabel = labelConstants.CHANGE_PASSWORD_LBL;
+    this.changePasswordIcon = iconConstants.KEY;
+    this.passwordHelper = textConstants.PASSWORD_HELP;
     this.editAccountBtnLabel = labelConstants.EDIT_ACCOUNT_LBL;
+    this.editAccountBtnIcon = iconConstants.EDIT;
     this.deleteAccountBtnLabel = labelConstants.DELETE_ACCOUNT_LBL;
+    this.deleteAccountBtnIcon = iconConstants.DELETE;
     this.saveAccountChangesBtnLabel = labelConstants.SAVE_BTN;
+    this.saveBtnIcon = iconConstants.SAVE;
     this.cancelAccountChangesBtnLabel = labelConstants.CANCEL_BTN;
+    this.cancelBtnIcon = iconConstants.CANCEL;
+    this.categories = labelConstants.PLAYER_CATEGORIES;
+    this.positions = labelConstants.PLAYER_POSITIONS;
     this.playerService.getPlayerToUpdate().subscribe(
       (data) => {
         if (data.firstName) {
@@ -62,6 +82,7 @@ export class EditPlayerComponent implements OnInit {
                 (result) => {
                     console.log('Player data received from new request:', result);
                     this.playerService.editPlayerObservable(result);
+                    this.loading = false;
                 }
             )
         }

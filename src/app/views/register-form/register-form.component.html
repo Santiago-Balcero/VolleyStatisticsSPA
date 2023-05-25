@@ -15,9 +15,9 @@
                     placeholder="Select your position" optionValue="val" optionLabel="pos" ></p-dropdown>
             <input type="password" class="input-text" id="password" name="password" formControlName="password" 
                     placeholder="Your password" pInputText />
-            <p class="help-text">Password must have at least 12 characters, one upper case letter, one lower casse letter and one digit.</p>
+            <p class="help-text">{{ passwordHelper }}</p>
             <button pButton type="submit" class="p-button-rounded" [label]="buttonLabel" [disabled]="registerForm.invalid">
-                <span class="material-icons-round button log-button">person_add</span>
+                <span class="material-icons-round button log-button">{{ buttonIcon }}</span>
             </button>
         </div>
     </form>

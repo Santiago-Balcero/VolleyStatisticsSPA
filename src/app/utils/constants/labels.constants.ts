@@ -14,6 +14,7 @@ export const labelConstants = {
   DELETE_ACCOUNT_LBL: 'Delete account',
   SAVE_BTN: 'Save',
   CANCEL_BTN: 'Cancel',
+  CHANGE_PASSWORD_LBL: 'Change password',
   PLAYER_CATEGORIES: [{cat: 'Men'}, {cat: 'Women'}],
   PLAYER_POSITIONS: [{pos: 'Outside Hitter', val: 'OH'},
                       {pos: 'Setter', val: 'S'},

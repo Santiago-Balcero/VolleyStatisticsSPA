@@ -41,6 +41,10 @@ export class PlayerService {
         return this.http.put<ApiResponse>(this.playersUrlApi, this.toBackEditPlayer(editPlayer), {context: checkToken()});
   }
 
+  changePassword(editPassword: any): Observable<any> {
+    return this.http.put<ApiResponse>(`${this.playersUrlApi}/password`, {old_password: editPassword.oldPassword, new_password: editPassword.newPassword}, {context: checkToken()});
+  }
+
   deletePlayer(): Observable<any> {
     return this.http.delete<ApiResponse>(`${this.playersUrlApi}/delete`, {context: checkToken()}).pipe(
         tap(() => {

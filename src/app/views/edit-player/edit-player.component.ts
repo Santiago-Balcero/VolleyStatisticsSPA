@@ -19,7 +19,9 @@ export class EditPlayerComponent implements OnInit {
   saveAccountChangesBtnLabel: string = '';
   cancelAccountChangesBtnLabel: string = '';
   edit: boolean = false;
+  editPass: boolean = false;
   editForm: FormGroup;
+  passwordForm: FormGroup;
   categories: Object[] = labelConstants.PLAYER_CATEGORIES;
   positions: Object[] = labelConstants.PLAYER_POSITIONS;
   inputHasChanged: boolean = false;
@@ -36,6 +38,10 @@ export class EditPlayerComponent implements OnInit {
         category: ['', [Validators.required]],
         position: ['', [Validators.required]]
       });
+    this.passwordForm = this.formBuilder.group({
+        oldPassword: ['', [Validators.required]],
+        newPassword: ['', [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]{12,}$')]]
+    });
   }
 
   ngOnInit(): void {
@@ -75,7 +81,6 @@ export class EditPlayerComponent implements OnInit {
         } else {
             this.inputHasChanged = false;
         }
-
   }
 
   editAccount(): void {
@@ -98,6 +103,24 @@ export class EditPlayerComponent implements OnInit {
     this.inputHasChanged = false;
   }
 
+  savePasswordChanges(): void {
+    this.modalService.showModal({
+        data: this.passwordForm.value,
+        message: 'Save changes?',
+        toDo: ToDo.changePassword,
+        type: Type.question
+    });
+    this.cancelPasswordChanges();
+  }
+
+  cancelPasswordChanges(): void {
+    for (let control of Object.keys(this.passwordForm.controls)) {
+        this.passwordForm.controls[control].setValue('');
+    }
+    this.passwordForm.markAsPristine();
+    this.editPass = false;
+  }
+
   checkValid(field: string): void {
     if (this.editForm.get(field)?.invalid) {
       console.log(`Field ${field} is invalid`, this.editForm.get(field)?.errors);
@@ -111,6 +134,10 @@ export class EditPlayerComponent implements OnInit {
         toDo: ToDo.deleteAccount,
         type: Type.warning
     });
+  }
+
+  editPassword(): void {
+    this.editPass = true;
   }
 
 }

@@ -20,5 +20,6 @@ export enum ToDo {
     logIn = 'log in',
     editAccount = 'edit account',
     deleteAccount = 'delete account',
+    changePassword = 'change password',
     none = ''
 }

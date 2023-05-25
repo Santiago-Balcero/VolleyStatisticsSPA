@@ -71,7 +71,15 @@ export class ModalComponent implements OnInit {
                 this.btn2Icon = iconConstants.CANCEL;
                 this.secondBtn = true;
                 break;
+            case ToDo.changePassword:
+                this.btn1Label = labelConstants.OK_BTN;
+                this.btn1Icon = iconConstants.DONE;
+                this.btn2Label = labelConstants.CANCEL_BTN;
+                this.btn2Icon = iconConstants.CANCEL;
+                this.secondBtn = true;
+                break;
             case ToDo.none:
+                break;
           }
           // Set modal icon
           switch (this.modalData.type) {
@@ -92,6 +100,7 @@ export class ModalComponent implements OnInit {
                 this.modalIcon = iconConstants.SAD;
                 break;
             case Type.none:
+                break;
           }
           this.show = true;
         }
@@ -156,6 +165,31 @@ export class ModalComponent implements OnInit {
                     });
                     this.loading = false;
                     this.router.navigate(['']);
+                },
+                error: (error) => {
+                    console.log('Error:', error.error);
+                    this.modalService.showModal({
+                        data: {},
+                        message: error.error.detail,
+                        toDo: ToDo.ok,
+                        type: Type.error
+                    });
+                    this.loading = false;
+                }
+            });
+            break;
+        case ToDo.changePassword:
+            this.loading = true;
+            this.playerService.changePassword(this.modalData.data).subscribe({
+                next: (result) => {
+                    this.modalService.showModal({
+                        data: {},
+                        message: result.detail,
+                        toDo: ToDo.ok,
+                        type: Type.success
+                    });
+                    this.loading = false;
+                    this.router.navigate(['account']);
                 },
                 error: (error) => {
                     console.log('Error:', error.error);
